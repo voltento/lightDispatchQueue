@@ -43,14 +43,14 @@ public:
 
 private:
   void handleQueue() {
-    Functor f;
     while (m_running) {
+      Functor f;
       m_queue.wait_dequeue(f);
       callFunctor(f);
     }
   }
 
-  void callFunctor(const Functor &functor) {
+  static void callFunctor(const Functor &functor) {
     if (functor) {
       functor();
     }
